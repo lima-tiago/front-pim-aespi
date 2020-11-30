@@ -5,11 +5,11 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Aespi - Example</title>
+        <title>Aespi - Painel</title>
       </Head>
 
       <div className="container">
-        <h1>Page Example</h1>
+        <h1>Painel</h1>
       </div>
     </>
   )

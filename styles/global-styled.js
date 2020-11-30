@@ -50,6 +50,9 @@ const GlobalStyle = createGlobalStyle`
     color: rgba(0, 0, 0, 0.6);
     font-size: 20px;
     margin: 0 0 8px;
+    width: 360px;
+    max-width: 100%;
+    text-align: center;
   }
 
 `

@@ -5,12 +5,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Aespi - Example</title>
+        <title>Aespi - Login Professor</title>
       </Head>
 
-      <div className="container">
-        <h1>Page Example</h1>
-      </div>
+      Professores
     </>
   )
 }

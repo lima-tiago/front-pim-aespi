@@ -18,7 +18,7 @@ export default function Home() {
             Escolha o que você deseja acessar.
           </p>
           <Card>
-            <Link href="">
+            <Link href="/login/aluno">
               <a>
                 <p>Questionário de aluno</p>
                 <Image src="/images/computer.svg" alt="" width={ 63 } height={ 63 } />
@@ -26,7 +26,7 @@ export default function Home() {
             </Link>
           </Card>
           <Card>
-            <Link href="">
+            <Link href="/login/professor">
               <a>
                 <p>Questionário de professores</p>
                 <Image src="/images/professor.svg" alt="" width={ 63 } height={ 63 } />
@@ -34,7 +34,7 @@ export default function Home() {
             </Link>
           </Card>
           <Card className="only-desktop">
-            <Link href="">
+            <Link href="/login/painel">
               <a>
                 <p>Painel administrativo</p>
                 <Image src="/images/painel.svg" alt="" width={ 63 } height={ 63 } />

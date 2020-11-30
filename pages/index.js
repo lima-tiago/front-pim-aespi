@@ -1,65 +1,80 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import styled from 'styled-components'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Aespi</title>
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      <Body>
+        <div className="container">
+          <Image src="/images/logo-aespi.png" alt="AESPI Ensino Superior do Piauí" width={ 210 } height={ 90 } />
+          <h1>Seja bem-vindo!</h1>
+          <p className="subtitle">
+            Escolha o que você deseja acessar.
+          </p>
+          <Card>
+            <Link href="">
+              <a>
+                <p>Questionário de aluno</p>
+                <Image src="/images/computer.svg" alt="" width={ 63 } height={ 63 } />
+              </a>
+            </Link>
+          </Card>
+          <Card>
+            <Link href="">
+              <a>
+                <p>Questionário de professores</p>
+                <Image src="/images/professor.svg" alt="" width={ 63 } height={ 63 } />
+              </a>
+            </Link>
+          </Card>
+          <Card className="only-desktop">
+            <Link href="">
+              <a>
+                <p>Painel administrativo</p>
+                <Image src="/images/painel.svg" alt="" width={ 63 } height={ 63 } />
+              </a>
+            </Link>
+          </Card>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+      </Body>
+    </>
   )
 }
+
+const Body = styled.div`
+  background-color: #F0F0F0;
+  .container {
+    min-height: 100vh;
+  }
+`
+
+const Card = styled.div`
+  a {
+    background-color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+    font-size: 22px;
+    width: 390px;
+    max-width: calc(100vw - 30px);
+    padding: 16px 12px;
+    margin: 8px 0;
+    transition: box-shadow 0.5s;
+    &:hover {
+      box-shadow: 0px 4px 20px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    p {
+      width: calc(100% - 63px)
+    }
+  }
+`

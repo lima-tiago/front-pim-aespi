@@ -29,6 +29,13 @@ class Drawer extends Component {
                 </a>
               </ActiveLink>
             </li>
+            <li>
+              <ActiveLink activeClassName="active" href="/painel/relatorios">
+                <a>
+                  RELATÓRIOS
+                </a>
+              </ActiveLink>
+            </li>
           </Menu>
         </DrawerLeft>
       </>

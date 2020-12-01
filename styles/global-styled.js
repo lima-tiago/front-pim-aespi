@@ -71,7 +71,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0 4px;
         transition: top 0.5s, font-size 0.5s;
       }
-      input {
+      input, textarea {
         background-color: #FFF;
         border: 1px solid #CCC;
         border-radius: 10px;
@@ -104,6 +104,9 @@ const GlobalStyle = createGlobalStyle`
             background-color: #FFF;
           }
         }
+      }
+      textarea {
+        width: 100%;
       }
     }
   }

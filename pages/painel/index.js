@@ -74,13 +74,13 @@ export default function Home() {
         </Header>
         
         <Card>
-          <div class="row">
-            <div class="title">
+          <div className="row">
+            <div className="title">
               <h1>
                 Satisfação dos funcionários com a faculdade
               </h1>
             </div>
-            <div class="graph">
+            <div className="graph">
               <div id="chart">
                 {seriesFuncionarios && options && (
                   <Chart options={options} series={seriesFuncionarios} type="bar" height={200} />
@@ -88,13 +88,13 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="title">
+          <div className="row">
+            <div className="title">
               <h1>
                 Satisfação dos alunos com a faculdade
               </h1>
             </div>
-            <div class="graph">
+            <div className="graph">
               {seriesAlunos && options && (
                 <Chart options={options} series={seriesAlunos} type="bar" height={200} />
               )}

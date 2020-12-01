@@ -13,18 +13,25 @@ export default function Home() {
   const [selectedOption, setOption] = useState(null)
   const [respostas, setRespostas] = useState([])
 
+  const headers = { Authorization: sessionStorage.getItem('token') }
+
   // Faz a requisição de todas as questões
   useEffect(() => {
-    axios.get('/api/questao')
-      .then(response => {
-        setQuestoes(response.data)
-      })
-  }, [questoes])
+    axios.get('https://pim-aespi.herokuapp.com/questionnaires/list/', {
+      headers: headers
+    })
+    .then(response => {
+      setQuestoes(response.data.listQuestions)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }, [])
 
   // Define a questão ser exibida
   useEffect(() => {
     setPergunta(questoes[countQuestao])
-  }, [questoes])
+  }, [countQuestao, questoes])
 
   function proximaQuestao(event) {
     event.preventDefault();
@@ -55,6 +62,17 @@ export default function Home() {
   useEffect(() => {
     if (countQuestao >= questoes.length && respostas.length > 0) {
       console.log(respostas)
+      let data = []
+      respostas.map(item => {
+        data.push({
+          idQuestion: item.id,
+          typeResponse: item.resposta
+        })
+      })
+
+      axios.post('https://pim-aespi.herokuapp.com/evaluative-report', data, {
+        headers: headers
+      })
     }
   }, [respostas])
 
@@ -85,7 +103,7 @@ export default function Home() {
               <>
                 <h1>Avaliação Institucional</h1>
                 <p className="pergunta">
-                  {pergunta ? pergunta.questao : null}
+                  {pergunta ? pergunta.question : null}
                 </p>
                 <div className="options">
                   <label>
@@ -133,7 +151,7 @@ export default function Home() {
                       Muito ruim
                   </label>
                 </div>
-                <div class="row">
+                <div className="row">
                   <ButtonVoltar
                     onClick={e => voltaQuestao(e)}
                     disabled={countQuestao === 0}

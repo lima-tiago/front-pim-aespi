@@ -18,15 +18,15 @@ export default function Home() {
     axios.post('https://pim-aespi.herokuapp.com/users/login', {
       email: email,
       password: senha,
-      role: 'aluno'
+      role: 'student'
     })
       .then(response => {
-        console.log(response)
+        sessionStorage.setItem('token', response.data.token)
         router.push('/questionario/aluno')
       })
       .catch(error => {
         console.log(error)
-        router.push('/questionario/aluno')
+        alert('Verifique se os dados foram preenchidos corretamente!')
       })
   }
 

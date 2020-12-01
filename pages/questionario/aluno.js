@@ -13,18 +13,26 @@ export default function Home() {
   const [selectedOption, setOption] = useState(null)
   const [respostas, setRespostas] = useState([])
 
+  const headers = { Authorization: sessionStorage.getItem('token') }
+
   // Faz a requisição de todas as questões
   useEffect(() => {
-    axios.get('/api/questao')
-    .then(response => {
-      setQuestoes(response.data)
+    axios.get('https://pim-aespi.herokuapp.com/questionnaires/list/', {
+      headers: headers
     })
-  }, [questoes])
+    .then(response => {
+      console.log(response.data.listQuestions)
+      setQuestoes(response.data.listQuestions)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }, [])
 
   // Define a questão ser exibida
   useEffect(() => {
     setPergunta(questoes[countQuestao])
-  }, [questoes])
+  }, [countQuestao, questoes])
 
   function proximaQuestao(event) {
     event.preventDefault();
@@ -35,8 +43,8 @@ export default function Home() {
     setRespostas([...respostas, salvaResposta])
 
     setPergunta(questoes[countQuestao])
-    setOption(null)
     setCountQuestao(countQuestao + 1)
+    setOption(null)
 
   }
   
@@ -55,6 +63,17 @@ export default function Home() {
   useEffect(() => {
     if (countQuestao >= questoes.length && respostas.length > 0) {
       console.log(respostas)
+      let data = []
+      respostas.map(item => {
+        data.push({
+          idQuestion: item.id,
+          typeResponse: item.resposta
+        })
+      })
+
+      axios.post('https://pim-aespi.herokuapp.com/evaluative-report', data, {
+        headers: headers
+      })
     }
   }, [respostas])
 
@@ -85,15 +104,15 @@ export default function Home() {
               <>
                 <h1>Avaliação Institucional</h1>
                 <p className="pergunta">
-                  { pergunta ? pergunta.questao : null}
+                  { pergunta ? pergunta.question : null }
                 </p>
                 <div className="options">
                   <label>
                     <input 
                       type="radio" 
                       value="Ótimo" 
-                      checked={selectedOption === "otimo"} 
-                      onChange={e => setOption('otimo')} 
+                      checked={selectedOption === "great"} 
+                      onChange={e => setOption('great')} 
                     />
                     Ótimo
                   </label>
@@ -101,8 +120,8 @@ export default function Home() {
                     <input 
                       type="radio" 
                       value="Muito bom" 
-                      checked={selectedOption === "muito_bom"} 
-                      onChange={e => setOption('muito_bom')} 
+                      checked={selectedOption === "good"} 
+                      onChange={e => setOption('good')} 
                     />
                     Muito bom
                   </label>
@@ -119,8 +138,8 @@ export default function Home() {
                     <input
                       type="radio" 
                       value="Ruim" 
-                      checked={selectedOption === "ruim"} 
-                      onChange={e => setOption('ruim')}
+                      checked={selectedOption === "bad"} 
+                      onChange={e => setOption('bad')}
                     />
                     Ruim
                   </label>
@@ -128,12 +147,12 @@ export default function Home() {
                     <input 
                       type="radio" 
                       value="Muito ruim" 
-                      checked={selectedOption === "muito_ruim"} 
-                      onChange={e => setOption('muito_ruim')}/>
+                      checked={selectedOption === "very bad"} 
+                      onChange={e => setOption('very bad')}/>
                       Muito ruim
                   </label>
                 </div>
-                <div class="row">
+                <div className="row">
                   <ButtonVoltar
                     onClick={e => voltaQuestao(e)}
                     disabled={countQuestao === 0}

@@ -97,7 +97,7 @@ export default function Questionarios() {
             </ButtonAvancar>
 
           </form>
-          <div class="title">
+          <div className="title">
             <h1>Cadastro de questão de Aluno</h1>
           </div>
           <form onSubmit={e => sendQuestaoAluno(e)}>

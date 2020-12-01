@@ -3,9 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 import Drawer from '../../components/drawer'
-import Chart from 'react-apexcharts'
+import dynamic from 'next/dynamic';
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 export default function Relatorios() {
+
 
   const colors = [
     '#008FFB',

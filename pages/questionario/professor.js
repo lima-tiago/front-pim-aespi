@@ -12,8 +12,11 @@ export default function Home() {
   const [countQuestao, setCountQuestao] = useState(0)
   const [selectedOption, setOption] = useState(null)
   const [respostas, setRespostas] = useState([])
+  const [headers, setHeader] = useState({})
 
-  const headers = { Authorization: sessionStorage.getItem('token') }
+  useEffect(() => {
+    setHeader({ Authorization: sessionStorage.getItem('token') })
+  })
 
   // Faz a requisição de todas as questões
   useEffect(() => {

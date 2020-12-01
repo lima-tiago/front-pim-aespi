@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,11 +9,10 @@ import axios from 'axios'
 export default function Questionarios() {
   const [questaoFuncionario, setQuestaoFuncionario] = useState(null);
   const [questaoAluno, setQuestaoAluno] = useState(null);
-  const [headers, setHeader] = useState({})
 
-  useEffect(() => {
-    setHeader({ Authorization: sessionStorage.getItem('token') })
-  }, [])
+  const headers = {
+    Authorization: sessionStorage.getItem('token')
+  }
 
   function sendQuestaoFuncionario(event) {
     event.preventDefault();

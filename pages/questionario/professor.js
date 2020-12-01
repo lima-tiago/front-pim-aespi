@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     setHeader({ Authorization: sessionStorage.getItem('token') })
-  })
+  }, [])
 
   // Faz a requisição de todas as questões
   useEffect(() => {

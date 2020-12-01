@@ -13,7 +13,7 @@ export default function Questionarios() {
 
   useEffect(() => {
     setHeader({ Authorization: sessionStorage.getItem('token') })
-  })
+  }, [])
 
   function sendQuestaoFuncionario(event) {
     event.preventDefault();

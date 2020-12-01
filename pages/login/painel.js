@@ -21,12 +21,12 @@ export default function Home() {
       role: 'admin'
     })
     .then(response => {
-      console.log(response)
+      sessionStorage.setItem('token', response.data.token)
       router.push('/painel')
     })
     .catch(error => {
       console.log(error)
-      router.push('/painel')
+      alert('Verifique se os dados foram preenchidos corretamente!')
     })
   }
 

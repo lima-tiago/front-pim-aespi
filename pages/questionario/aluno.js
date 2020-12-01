@@ -40,6 +40,18 @@ export default function Home() {
     let salvaResposta = pergunta
     salvaResposta.resposta = selectedOption
 
+    let data = {
+      idQuestion: salvaResposta.id,
+      typeResponse: salvaResposta.resposta
+    }
+
+    axios.post('https://pim-aespi.herokuapp.com/evaluative-report', data, {
+      headers: headers
+    })
+    .then(response => {
+      console.log(response.data)
+    })
+
     setRespostas([...respostas, salvaResposta])
 
     setPergunta(questoes[countQuestao])
@@ -60,22 +72,22 @@ export default function Home() {
     setOption(null)
   }
 
-  useEffect(() => {
-    if (countQuestao >= questoes.length && respostas.length > 0) {
-      console.log(respostas)
-      let data = []
-      respostas.map(item => {
-        data.push({
-          idQuestion: item.id,
-          typeResponse: item.resposta
-        })
-      })
+  // useEffect(() => {
+  //   if (countQuestao >= questoes.length && respostas.length > 0) {
+  //     console.log(respostas)
+  //     let data = []
+  //     respostas.map(item => {
+  //       data.push({
+  //         idQuestion: item.id,
+  //         typeResponse: item.resposta
+  //       })
+  //     })
 
-      axios.post('https://pim-aespi.herokuapp.com/evaluative-report', data, {
-        headers: headers
-      })
-    }
-  }, [respostas])
+  //     axios.post('https://pim-aespi.herokuapp.com/evaluative-report', data, {
+  //       headers: headers
+  //     })
+  //   }
+  // }, [respostas])
 
   return (
     <>

@@ -39,6 +39,18 @@ export default function Home() {
     let salvaResposta = pergunta
     salvaResposta.resposta = selectedOption
 
+    let data = {
+      idQuestion: salvaResposta.id,
+      typeResponse: salvaResposta.resposta
+    }
+
+    axios.post('https://pim-aespi.herokuapp.com/evaluative-report', data, {
+      headers: headers
+    })
+    .then(response => {
+      console.log(response.data)
+    })
+
     setRespostas([...respostas, salvaResposta])
 
     setPergunta(questoes[countQuestao])
@@ -59,22 +71,22 @@ export default function Home() {
     setOption(null)
   }
 
-  useEffect(() => {
-    if (countQuestao >= questoes.length && respostas.length > 0) {
-      console.log(respostas)
-      let data = []
-      respostas.map(item => {
-        data.push({
-          idQuestion: item.id,
-          typeResponse: item.resposta
-        })
-      })
+  // useEffect(() => {
+  //   if (countQuestao >= questoes.length && respostas.length > 0) {
+  //     console.log(respostas)
+  //     let data = []
+  //     respostas.map(item => {
+  //       data.push({
+  //         idQuestion: item.id,
+  //         typeResponse: item.resposta
+  //       })
+  //     })
 
-      axios.post('https://pim-aespi.herokuapp.com/evaluative-report', data, {
-        headers: headers
-      })
-    }
-  }, [respostas])
+  //     axios.post('https://pim-aespi.herokuapp.com/evaluative-report', data, {
+  //       headers: headers
+  //     })
+  //   }
+  // }, [respostas])
 
   return (
     <>
@@ -110,8 +122,8 @@ export default function Home() {
                     <input
                       type="radio"
                       value="Ótimo"
-                      checked={selectedOption === "otimo"}
-                      onChange={e => setOption('otimo')}
+                      checked={selectedOption === "great"}
+                      onChange={e => setOption('great')}
                     />
                     Ótimo
                   </label>
@@ -119,8 +131,8 @@ export default function Home() {
                     <input
                       type="radio"
                       value="Muito bom"
-                      checked={selectedOption === "muito_bom"}
-                      onChange={e => setOption('muito_bom')}
+                      checked={selectedOption === "good"}
+                      onChange={e => setOption('good')}
                     />
                     Muito bom
                   </label>
@@ -137,8 +149,8 @@ export default function Home() {
                     <input
                       type="radio"
                       value="Ruim"
-                      checked={selectedOption === "ruim"}
-                      onChange={e => setOption('ruim')}
+                      checked={selectedOption === "bad"}
+                      onChange={e => setOption('bad')}
                     />
                     Ruim
                   </label>
@@ -146,8 +158,8 @@ export default function Home() {
                     <input
                       type="radio"
                       value="Muito ruim"
-                      checked={selectedOption === "muito_ruim"}
-                      onChange={e => setOption('muito_ruim')} />
+                      checked={selectedOption === "very bad"}
+                      onChange={e => setOption('very bad')} />
                       Muito ruim
                   </label>
                 </div>

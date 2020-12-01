@@ -22,6 +22,7 @@ export default function Home() {
     })
       .then(response => {
         console.log(response)
+        sessionStorage.setItem('token', response.data.token)
         router.push('/questionario/professor')
       })
       .catch(error => {
